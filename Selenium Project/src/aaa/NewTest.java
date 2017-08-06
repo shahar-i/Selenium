@@ -22,7 +22,7 @@ import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import com.aventstack.extentreports.reporter.configuration.ChartLocation;
 import com.aventstack.extentreports.reporter.configuration.Theme;
-import com.thoughtworks.selenium.webdriven.commands.Click;
+//import com.thoughtworks.selenium.webdriven.commands.Click;
 
 public class NewTest {
 	WebDriver  driver=null;

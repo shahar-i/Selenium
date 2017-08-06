@@ -3,7 +3,7 @@
 <suite name="Suite">
   <test name="Test">
     <classes>
-      <class name="aaa.NewTest"/>
+      <class name="aaa.DisplayDate"/>
     </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->
