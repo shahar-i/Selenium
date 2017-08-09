@@ -1,4 +1,4 @@
-package aaa;
+package exercise;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
@@ -51,23 +51,24 @@ public class Hello {
 			e1.printStackTrace();
 		}
 		
-		// verify left button text
+		// 2.verify left button text
 		verifyLeftButtonText();
 
-		// 2. click on the left button
+		// 3. click on the left button
 		clickLeftButton();
 
-		// 3. verify hello students text
+		// 4. verify hello students text
 		verifyHelloStudent();
 
-		// 4. refresh the page
+		// 5. refresh the page
 		refreshThePage();
 		// verify right button text
 		verifyRightButtonText();
 
-		// 5. click on the left button
+		// 6. click on the left button
 		clickRightButton();
-		//3. verify hello students text
+		
+		// 7. verify hello students text
 		verifyHelloStudent();
 	
 	}

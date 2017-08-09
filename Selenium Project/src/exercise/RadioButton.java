@@ -1,4 +1,4 @@
-package aaa;
+package exercise;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertThrows;
@@ -32,7 +32,7 @@ import com.aventstack.extentreports.reporter.configuration.Theme;
 
 //import com.thoughtworks.selenium.webdriven.commands.Click;
 
-public class DisplayDate {
+public class RadioButton {
 	WebDriver driver;
 
 	@BeforeTest
@@ -41,45 +41,27 @@ public class DisplayDate {
 	}
 
 	@Test
-	public void testDisplayDate() throws InterruptedException {
+	public void testRadioButton() throws InterruptedException {
 
 		// 1. go over displayDate.html page
-		driver.get("file:///C:/Examples/displayDate.html");
+		driver.get("file:///C:/Examples/radioButton.html");
 		System.out.println("entered to the page");
 
 		// 2. verify the first Line string
 		WebElement firstLine = driver.findElement(By.xpath("/html/body/p[1]"));
-		assertEquals("Click the button to display the date.",firstLine.getText(), "Strings not matching");
+		assertEquals("For what \"text-align\" feature is used ?",firstLine.getText(), "Strings not matching");
 		System.out.println("verified the first Line string");
 
-		// 3. verify the button
-		WebElement button = driver.findElement(By.tagName("button"));
-		if (button.getText().equals("The time is?")) {
-			System.out.println("the text on button is correct");
-			assertTrue(true);
-		} else {
-			System.out.println("the text on button isn't correct");
-			assertTrue(false);
-		}
-		// 4. click on the button and verify date displayed
-		button.click();
-		// WebElement element = (new WebDriverWait(driver,10)).until(ExpectedConditions.presenceOfElementLocated(By.id("dateInfo")));
-		WebElement dateInfo = driver.findElement(By.id("dateInfo"));
-		if (dateInfo.isDisplayed()) {
-			System.out.println("the date is displayed");
-			assertTrue(true);
-		} else {
-			System.out.println("the date isn't displayed");
-			assertTrue(false);
-		}
+		//3. verify answer text 1
+		WebElement answerString1 = driver.findElement(By.xpath("html/body/form/[text() = 'Set the text size']"));
+		String str = answerString1.getText();
+		//assertEquals("Set the text size",str, "Strings not matching");
+		System.out.println(answerString1);
 
+
+		 
+		 
 	
-		 
-		 
-		// 5. verify the first Line string
-		WebElement lastLine = driver.findElement(By.xpath("/html/body/h6"));
-		assertEquals("this is the information from my computer",lastLine.getText(), "Strings not matching");
-		System.out.println("verified the last Line string");
 
 		System.out.println("Done.");
 	}

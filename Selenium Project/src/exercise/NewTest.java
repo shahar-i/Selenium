@@ -1,4 +1,4 @@
-package aaa;
+package exercise;
 
 import junit.framework.Assert;
 
