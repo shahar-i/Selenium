@@ -73,9 +73,7 @@ public class DisplayDate {
 			assertTrue(false);
 		}
 
-		 Date curDate = new Date();
-		 String DateToStr = DateFormat.getInstance().format(curDate);
-		 System.out.println(DateToStr);
+	
 		 
 		 
 		// 5. verify the first Line string
