@@ -2,24 +2,24 @@
 <testng-results skipped="0" failed="0" total="1" passed="1">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="11808" started-at="2017-08-09T17:35:24Z" finished-at="2017-08-09T17:35:36Z">
+  <suite name="Default suite" duration-ms="9684" started-at="2017-08-11T13:19:44Z" finished-at="2017-08-11T13:19:54Z">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="11808" started-at="2017-08-09T17:35:24Z" finished-at="2017-08-09T17:35:36Z">
-      <class name="aaa.Hello">
-        <test-method status="PASS" signature="startTest()[pri:0, instance:aaa.Hello@77caeb3e]" name="startTest" is-config="true" duration-ms="8669" started-at="2017-08-09T20:35:24Z" finished-at="2017-08-09T20:35:33Z">
+    <test name="Default test" duration-ms="9684" started-at="2017-08-11T13:19:44Z" finished-at="2017-08-11T13:19:54Z">
+      <class name="exercise.RadioButton">
+        <test-method status="PASS" signature="initTest()[pri:0, instance:exercise.RadioButton@77caeb3e]" name="initTest" is-config="true" duration-ms="8222" started-at="2017-08-11T16:19:44Z" finished-at="2017-08-11T16:19:52Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- startTest -->
-        <test-method status="PASS" signature="testHello()[pri:0, instance:aaa.Hello@77caeb3e]" name="testHello" duration-ms="947" started-at="2017-08-09T20:35:33Z" finished-at="2017-08-09T20:35:34Z">
+        </test-method> <!-- initTest -->
+        <test-method status="PASS" signature="testRadioButton()[pri:0, instance:exercise.RadioButton@77caeb3e]" name="testRadioButton" duration-ms="421" started-at="2017-08-11T16:19:52Z" finished-at="2017-08-11T16:19:53Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- testHello -->
-        <test-method status="PASS" signature="closeBroswer()[pri:0, instance:aaa.Hello@77caeb3e]" name="closeBroswer" is-config="true" duration-ms="2147" started-at="2017-08-09T20:35:34Z" finished-at="2017-08-09T20:35:36Z">
+        </test-method> <!-- testRadioButton -->
+        <test-method status="PASS" signature="closeBroswer()[pri:0, instance:exercise.RadioButton@77caeb3e]" name="closeBroswer" is-config="true" duration-ms="1018" started-at="2017-08-11T16:19:53Z" finished-at="2017-08-11T16:19:54Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- closeBroswer -->
-      </class> <!-- aaa.Hello -->
+      </class> <!-- exercise.RadioButton -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>

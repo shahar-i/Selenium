@@ -6,6 +6,7 @@ import static org.testng.Assert.assertTrue;
 import junit.framework.Assert;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.text.DateFormat;
 import java.util.Date;
 
@@ -34,30 +35,36 @@ import com.aventstack.extentreports.reporter.configuration.Theme;
 
 public class RadioButton {
 	WebDriver driver;
-
+	File file;
+	String url = "C:/Examples/radiobutton.html";
+	
 	@BeforeTest
 	public void initTest() {
 		driver = new FirefoxDriver();
+		file = new File(url);
+
 	}
 
 	@Test
 	public void testRadioButton() throws InterruptedException {
 
 		// 1. go over displayDate.html page
-		driver.get("file:///C:/Examples/radioButton.html");
-		System.out.println("entered to the page");
-
+		try {
+			checkIfFileExist();
+		} catch (FileNotFoundException e1) {
+			
+			e1.printStackTrace();
+		}
+		
 		// 2. verify the first Line string
-		WebElement firstLine = driver.findElement(By.xpath("/html/body/p[1]"));
-		assertEquals("For what \"text-align\" feature is used ?",firstLine.getText(), "Strings not matching");
-		System.out.println("verified the first Line string");
-
-		//3. verify answer text 1
-		WebElement answerString1 = driver.findElement(By.xpath("html/body/form/[text() = 'Set the text size']"));
-		String str = answerString1.getText();
-		//assertEquals("Set the text size",str, "Strings not matching");
-		System.out.println(answerString1);
-
+		//assertEquals("For what \"text-align\" feature is used ?",firstLine.getText(), "Strings not matching");
+		//System.out.println("verified the first Line string");
+		
+		verifyFirstLine();
+		
+		//3. verify answers text 
+		verifyAnswersText();
+	
 
 		 
 		 
@@ -70,5 +77,37 @@ public class RadioButton {
 	public void closeBroswer() {
 		this.driver.quit();
 	}
-
+	
+	
+	public void checkIfFileExist() throws FileNotFoundException {
+		if (file.exists()) {
+			driver.get("file:///" + url);
+			System.out.println("file is exist and entered to the page");
+		} else {
+			throw new FileNotFoundException("the file not found");
+		}
+	}
+	
+	public void verifyFirstLine(){
+		WebElement firstLine = driver.findElement(By.xpath("/html/body/p[1]"));
+		if (firstLine.isDisplayed()){
+			System.out.println("verified the first Line string");	
+			assertTrue(true);
+		}
+		else{
+			System.out.println("not verified the first Line string");	
+			assertTrue(false);
+		}
+	}
+	public void verifyAnswersText(){
+		String answers = driver.findElement(By.name("frm")).getText();
+		if(answers.equals("Set the text size\nSet the text font\nSet text color\nSet text alignment")){
+		System.out.println("the answers text verified");
+		assertTrue(true,"the answers text verified");
+		}
+		else{
+			System.out.println("the answers text not verified");
+			assertTrue(false,"the answers text not verified");
+		}
+	}
 }

@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Suite">
-  <test name="Test">
+<suite name="Suite" parallel="false">
+  <test name="Test DisplayDate">
     <classes>
       <class name="aaa.DisplayDate"/>
     </classes>
-  </test> <!-- Test -->
+  </test>
+   <test name="Test Hello">
+    <classes>
+      <class name="aaa.Hello"/>
+    </classes>
+  </test> 
+    <test name="Test Radio button">
+    <classes>
+      <class name="aaa.RadioButton"/>
+    </classes>
+  </test><!-- Test -->
 </suite> <!-- Suite -->

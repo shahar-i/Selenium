@@ -35,7 +35,7 @@ public class Hello {
 
 	@BeforeTest
 	public void startTest() {
-
+		
 		driver = new ChromeDriver();
 		file = new File(url);
 	}
@@ -47,11 +47,11 @@ public class Hello {
 		try {
 			checkIfFileExist();
 		} catch (FileNotFoundException e1) {
-			// TODO Auto-generated catch block
+			
 			e1.printStackTrace();
 		}
 		
-		// 2.verify left button text
+		// 2. verify left button text
 		verifyLeftButtonText();
 
 		// 3. click on the left button
@@ -70,11 +70,14 @@ public class Hello {
 		
 		// 7. verify hello students text
 		verifyHelloStudent();
+		
+		System.out.println("Done.");
 	
 	}
 
 	@AfterTest
 	public void closeBroswer() {
+		
 		this.driver.quit();
 	}
 

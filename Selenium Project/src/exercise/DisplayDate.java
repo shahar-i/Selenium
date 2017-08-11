@@ -6,10 +6,12 @@ import static org.testng.Assert.assertTrue;
 import junit.framework.Assert;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.text.DateFormat;
 import java.util.Date;
 
 import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.openqa.selenium.By;
 import org.openqa.selenium.By.ByXPath;
 import org.openqa.selenium.Keys;
@@ -34,25 +36,76 @@ import com.aventstack.extentreports.reporter.configuration.Theme;
 
 public class DisplayDate {
 	WebDriver driver;
+	File file;
+	String url = "C:/Examples/displaydate.html";
 
 	@BeforeTest
 	public void initTest() {
-		driver = new FirefoxDriver();
+		
+		driver = new ChromeDriver();
+		file = new File(url);
 	}
 
 	@Test
 	public void testDisplayDate() throws InterruptedException {
-
+		
 		// 1. go over displayDate.html page
-		driver.get("file:///C:/Examples/displayDate.html");
-		System.out.println("entered to the page");
+		try {
+			checkIfFileExist();
+		} catch (FileNotFoundException e1) {
+			
+			e1.printStackTrace();
+		}
 
 		// 2. verify the first Line string
-		WebElement firstLine = driver.findElement(By.xpath("/html/body/p[1]"));
-		assertEquals("Click the button to display the date.",firstLine.getText(), "Strings not matching");
-		System.out.println("verified the first Line string");
+		verifyFirstLine();
+		
+		// 3. verify the button text
+		verifyButtonText();
+		
+		// 4. click on the button and verify date displayed
+		clickTheButton();
+		
+		// WebElement element = (new WebDriverWait(driver,10)).until(ExpectedConditions.presenceOfElementLocated(By.id("dateInfo")));
+		
+		// 5. check if date is displayed 
+		 checkDateIsDislayed();
+		 
+		// 6. verify the last Line string
+		 verifyLastLine();
 
-		// 3. verify the button
+		System.out.println("Done.");
+	}
+
+	@AfterTest
+	public void closeBroswer() {
+		
+		this.driver.quit();
+	}
+
+	
+	public void checkIfFileExist() throws FileNotFoundException {
+		if (file.exists()) {
+			driver.get("file:///" + url);
+			System.out.println("file is exist and entered to the page");
+		} else {
+			throw new FileNotFoundException("the file not found");
+		}
+	};
+	
+	public void verifyFirstLine(){
+		WebElement firstLine = driver.findElement(By.xpath("/html/body/p[1]"));
+		if (firstLine.isDisplayed()){
+			System.out.println("verified the first Line string");	
+			assertTrue(true);
+		}
+		else{
+			System.out.println("not verified the first Line string");	
+			assertTrue(false);
+		}
+		//assertEquals("Click the button to display the date.",firstLine.getText(), "Strings not matching");
+	}
+	public void verifyButtonText(){
 		WebElement button = driver.findElement(By.tagName("button"));
 		if (button.getText().equals("The time is?")) {
 			System.out.println("the text on button is correct");
@@ -61,32 +114,41 @@ public class DisplayDate {
 			System.out.println("the text on button isn't correct");
 			assertTrue(false);
 		}
-		// 4. click on the button and verify date displayed
-		button.click();
-		// WebElement element = (new WebDriverWait(driver,10)).until(ExpectedConditions.presenceOfElementLocated(By.id("dateInfo")));
-		WebElement dateInfo = driver.findElement(By.id("dateInfo"));
-		if (dateInfo.isDisplayed()) {
-			System.out.println("the date is displayed");
-			assertTrue(true);
-		} else {
-			System.out.println("the date isn't displayed");
-			assertTrue(false);
-		}
-
+	}
 	
-		 
-		 
-		// 5. verify the first Line string
-		WebElement lastLine = driver.findElement(By.xpath("/html/body/h6"));
-		assertEquals("this is the information from my computer",lastLine.getText(), "Strings not matching");
-		System.out.println("verified the last Line string");
-
-		System.out.println("Done.");
+		public void clickTheButton() {
+			WebElement button = driver.findElement(By.tagName("button"));
+			try {
+				button.click();
+				System.out.println("clicked on the " + "\"" + button.getText() + "\"" + " button");
+				assertTrue(true);
+			} catch (Exception e) {
+				System.out.println("not clicked on the " + "\"" + button.getText() + "\"" + " button");
+				assertTrue(false);
+				e.printStackTrace();
+			}	
 	}
+		public void checkDateIsDislayed(){
+			WebElement dateInfo = driver.findElement(By.id("dateInfo"));
+			if (dateInfo.isDisplayed()) {
+				System.out.println("the date is displayed");
+				assertTrue(true);
+			} else {
+				System.out.println("the date isn't displayed");
+				assertTrue(false);
+			}
 
-	@AfterTest
-	public void closeBroswer() {
-		this.driver.quit();
-	}
-
+		}
+		public void verifyLastLine(){
+			WebElement lastLine = driver.findElement(By.xpath("/html/body/h6"));
+			if (lastLine.isDisplayed()){
+				System.out.println("verified the last Line string");	
+				assertTrue(true);
+			}
+			else{
+				System.out.println("not verified the last Line string");	
+				assertTrue(false);
+			}
+			//assertEquals("Click the button to display the date.",firstLine.getText(), "Strings not matching");
+		}
 }
