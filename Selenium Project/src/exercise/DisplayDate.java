@@ -1,4 +1,4 @@
-package exercise;
+package aaa;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertThrows;
