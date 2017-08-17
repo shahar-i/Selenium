@@ -39,12 +39,10 @@ public class RadioButton {
 	File file;
 	String url = "C:/Examples/radiobutton.html";
 
-
 	@BeforeTest
 	public void initTest() {
 		driver = new FirefoxDriver();
 		file = new File(url);
-
 	}
 
 	@Test
@@ -59,36 +57,37 @@ public class RadioButton {
 		}
 		
 		// 2. verify the first Line string
-		//assertEquals("For what \"text-align\" feature is used ?",firstLine.getText(), "Strings not matching");
-		//System.out.println("verified the first Line string");
-	
 		verifyFirstLine();
 		
-		//3. verify text page  
+		//3. verify the text page  
 		verifyTextPage();
-		// verify the correct answer
+		
+		//4. verify the text button
+		verifyTextButton();
+		
+		//5. verify the correct answer
 		List<WebElement>  oRadioButton = driver.findElements(By.name("r"));
 		int iSize = oRadioButton.size(); 
 		WebElement  correctAnswer = driver.findElement(By.id("answer1"));
 
 		for(int i=0;i<iSize;i++){
 			oRadioButton.get(i).click();
-			if(oRadioButton.get(i).isSelected()){
-				if(correctAnswer.getText().equals("Try Again"))
-					System.out.println("try again");
+			if(oRadioButton.get(i).isSelected() && (correctAnswer.getText().equals("Try Again")) ){
+					System.out.println("The answer is: "+ correctAnswer.getText());
+					clickOnClear();
+				}
 			
 			else{
-				System.out.println("Correct Answer");
-
+				System.out.println("The answer is: "+ correctAnswer.getText());
+				clickOnClear();
 			}
-
-			// String sValue = oRadioButton.get(i).toString();
+			
 		}
-		//System.out.println(oRadioButton.);
+		
+		System.out.println("Done.");
+
 	}
 
-		System.out.println("Done.");
-	}
 
 	@AfterTest
 	public void closeBroswer() {
@@ -99,58 +98,59 @@ public class RadioButton {
 	public void checkIfFileExist() throws FileNotFoundException {
 		if (file.exists()) {
 			driver.get("file:///" + url);
-			System.out.println("file is exist and entered to the page");
+			System.out.println("The file is exist and entered to the page");
 		} else {
-			throw new FileNotFoundException("the file not found");
+			throw new FileNotFoundException("The file not found");
 		}
 	};
 	
 	public void verifyFirstLine(){
 		WebElement firstLine = driver.findElement(By.xpath("/html/body/p[1]"));
 		if (firstLine.isDisplayed()){
-			System.out.println("verified the first Line string");	
+			System.out.println("Verified the first Line string");	
 			assertTrue(true);
 		}
 		else{
-			System.out.println("not verified the first Line string");	
+			System.out.println("Not verified the first Line string");	
 			assertTrue(false);
 		}
-		//assertEquals("Click the button to display the date.",firstLine.getText(), "Strings not matching");
 	}
+	
 	public void verifyTextPage(){
 		String text = driver.findElement(By.name("frm")).getText();
 		if(text.equals("Set the text size\nSet the text font\nSet text color\nSet text alignment")){
-			System.out.println("the text is correct");
+			System.out.println("The text is correct");
 			assertTrue(true);
 		}
 		else{
-			System.out.println("the text is not correct");
+			System.out.println("The text is not correct");
 			assertTrue(false);
 		}
 	}
 	public void clickOnClear(){
-		WebElement clearButton = driver.findElement(By.name("b1"));
+		WebElement clearButton = driver.findElement(By.id("b1"));
 
 		try {
 			clearButton.click();
-			System.out.println("clicked on clear");
+			System.out.println("Clicked on clear");
 			assertTrue(true);
 		} catch (Exception e) {
-			System.out.println("not clicked on clear");
+			System.out.println("Not clicked on clear");
 			assertTrue(false);
 			e.printStackTrace();
 		}
 		
 	}
 	public void verifyTextButton(){
-		WebElement clearButton = driver.findElement(By.name("b1"));
+		WebElement clearButton = driver.findElement(By.id("b1"));
 
-		if(clearButton.getAttribute("value").equals("")){
-			System.out.println("the text on button is correct");
+		if(clearButton.getAttribute("value").equals("נקה סימון")){
+			System.out.println("The text on button is correct");
 			assertTrue(true);
 		}
+		
 		else{
-			System.out.println("the text on button is not correct");
+			System.out.println("The text on button is not correct");
 			assertTrue(false);
 			
 		}

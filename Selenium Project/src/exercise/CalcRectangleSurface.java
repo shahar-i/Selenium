@@ -37,20 +37,18 @@ import com.aventstack.extentreports.reporter.configuration.Theme;
 
 //import com.thoughtworks.selenium.webdriven.commands.Click;
 
-public class Calc {
+public class CalcRectangleSurface {
 	WebDriver driver;
 	File file;
-	String url = "C:/Examples/calc.html";
+	String url = "C:/Examples/calaRectangleSurface.html";
 
-	@FindBy(id="num1")
-	private WebElement BillingRateTextBox;
+
 
 	@BeforeTest
 	public void initTest() {
 
 		driver = new FirefoxDriver();
 		file = new File(url);
-		
 	}
 
 	@Test
@@ -66,27 +64,25 @@ public class Calc {
 
 		// 2. verify the text page
 
-		verifyTextPage();
+		//verifyTextPage();
 		
-		
-		WebElement num1 = driver.findElement(By.id("num1"));
-		WebElement num2 = driver.findElement(By.id("num2"));
-		WebElement sum = driver.findElement(By.id("sum"));
-		WebElement sub = driver.findElement(By.id("sub"));
-		WebElement mult = driver.findElement(By.id("mult"));
-		WebElement div = driver.findElement(By.id("div"));
+		WebElement num1 = driver.findElement(By.id("width"));
+		WebElement num2 = driver.findElement(By.id("height"));
+
+		WebElement mult = driver.findElement(By.id("surface"));
+	
 		// clear all text box
 		clearAllFields(num1, num2);
 		//enter numbers to text box
-		enterNumbers(num1,"10",num2,"2");
+		enterNumbers(num1,"6",num2,"3");
 		//click on calculation and calculate
 		clickOnCalculation();
-		calc(num1,num2, sum,sub,mult,div);
+		calc(num1,num2,mult);
 		
 		clearAllFields(num1, num2);
 		enterNumbers(num1,"8",num2,"4");
 		clickOnCalculation();
-		calc(num1,num2, sum,sub,mult,div);
+		calc(num1,num2,mult);
 
 		System.out.println("Done.");
 	}
@@ -98,7 +94,6 @@ public class Calc {
 
 		this.driver.quit();
 	}
-
 
 	public void checkIfFileExist() throws FileNotFoundException {
 		if (file.exists()) {
@@ -121,8 +116,9 @@ public class Calc {
 		}
 		//assertEquals("Click the button to display the date.",firstLine.getText(), "Strings not matching");
 	}
+	
 	public void clickOnCalculation() throws InterruptedException{
-		WebElement click = driver.findElement(By.id("b1"));
+		WebElement click = driver.findElement(By.xpath("html/body/form/input[3]"));
 		click.click();
 		System.out.println("Clicked on calc");
 		Thread.sleep(4000);
@@ -140,49 +136,24 @@ public class Calc {
 
 
 	}
+	
 	public void clearAllFields(WebElement num1,WebElement num2){
 		num1.clear();
 		num2.clear();
 		System.out.println("All fields cleared");
 	}
 
-	public void calc(WebElement num1,WebElement num2,WebElement sum1,WebElement sub1,WebElement mult1,WebElement div1){
-		int temp,a,b,sum,sumCalc, sub, subCalc,mult,multCalc; 
-		float div = 0, divCalc;
+	public void calc(WebElement num1,WebElement num2,WebElement mult1){
+		int a,b,mult,multCalc; 
+		
 		//String sum1 = driver.findElement(By.id("sum")).getText();
 		a = Integer.parseInt(num1.getAttribute("value"));
 		b = Integer.parseInt(num2.getAttribute("value"));
-		sumCalc = Integer.parseInt(sum1.getAttribute("value"));
-		subCalc = Integer.parseInt(sub1.getAttribute("value"));
+		
 		multCalc = Integer.parseInt(mult1.getAttribute("value"));
-		divCalc = Float.parseFloat(div1.getAttribute("value"));
-		sum=a+b;
-		sub=a-b;
+		
 		mult=a*b;
 
-		try {
-			div=a/b;
-			
-		} catch (ArithmeticException e1) {
-			System.out.println("You tried to divied by zero");
-			e1.printStackTrace();
-		}
-		if(sumCalc == sum){
-			System.out.println("The sum is correct");
-			assertTrue(true);
-		}
-		else{
-			System.out.println("The sum is not correct");
-			assertTrue(false);
-		}
-		if(subCalc == sub){
-			System.out.println("The sub is correct");
-			assertTrue(true);
-		}
-		else{
-			System.out.println("The sub is not correct");
-			assertTrue(false);
-		}
 		if(multCalc == mult){
 			System.out.println("The mult is correct");
 			assertTrue(true);
@@ -192,17 +163,8 @@ public class Calc {
 			assertTrue(false);
 		}
 
-		if(divCalc == div ){
-			System.out.println("The div is correct");
-			assertTrue(true);
-		}
-		else{
-			System.out.println("The div is not correct");
-			System.out.println(div);
-			assertTrue(false);
-		}
+	
 	} 
-
 
 	public void verifyTextPage(){
 		String text = driver.findElement(By.name("frm1")).getText();
